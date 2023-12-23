@@ -1,0 +1,15 @@
+
+
+Power query for creating a new conditional column surcharge:
+
+= Table.AddColumn(#"Added Custom", "Surcharge",
+ each if [Ship Mode] = "Same Day" then 0.2 
+ else if [Ship Mode] = "First Class" then 0.1 
+ else if [Ship Mode] = "Standard Class" then 0.5 
+ else 0)
+
+Power query for creating a custom column Total cost:
+
+
+= Table.AddColumn(#"Added Conditional Column", "Total cost", 
+                   each ([Sales]-[Profit])*(1+[surcharge]))
